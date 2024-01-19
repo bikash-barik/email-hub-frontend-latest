@@ -9,7 +9,7 @@ import React from 'react';
 import Hubrouters from './Routers/Hubrouters';
 import UserHubrouters from './Routers/UserHubrouters';
 import IndexRouter from './Routers/IndexRouter';
-import NotFound from './Pages/NotFound';
+import Price from './components/common/Price';
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <Switch>
           <Route path="/user" component={UserHubrouters} />
           <Route path='/hub' component={Hubrouters} />
+          <Route path='/price' component={Price} />
           
           <IndexRouter />
           

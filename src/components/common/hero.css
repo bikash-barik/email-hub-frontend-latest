@@ -1,0 +1,141 @@
+.home1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 1rem 1rem 1rem 1rem;
+}
+.home1 img {
+  width: 45%;
+}
+.home1inner {
+  width: 36%;
+  /* padding-left: 2rem; */
+}
+.home1inner h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.home1inner p {
+  font-size: 1.7rem;
+  color: rgb(149, 149, 149);
+}
+.home1inner h6 {
+  color: rgb(105, 104, 104);
+  font-size: 1rem;
+}
+
+/* Hero1 */
+.hero1 {
+  margin: 5rem 1rem 5rem 1rem;
+  display: flex;
+  align-items: center;
+}
+.hero1 img {
+  width: 45%;
+  margin-right: 3rem;
+}
+.hero1inner h1 span {
+  color: blue;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.hero1inner h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.hero1inner p {
+  font-size: 1.2rem;
+  text-align: justify;
+  color: rgb(149, 149, 149);
+}
+.hero1inner a {
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+/* hero2 */
+.hero11 {
+  margin: 7rem 1rem 7rem 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.hero11 img {
+  width: 45%;
+  margin-right: 0rem;
+}
+.hero11inner h1 span {
+  color: blue;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.hero11inner h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.hero11inner p {
+  font-size: 1.2rem;
+  text-align: justify;
+  color: rgb(149, 149, 149);
+  width: 95%;
+}
+.hero11inner a {
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .home1 {
+    flex-direction: column;
+  }
+  .home1inner {
+    padding-left: 0.5rem;
+    width: 100%;
+  }
+  .home1 img {
+    width: 100%;
+  }
+  .home1inner h1 {
+    font-size: 2.7rem;
+    font-weight: 700;
+  }
+
+  /* hero1 */
+  .hero1 {
+    flex-direction: column-reverse;
+  }
+  .hero1 img {
+    width: 100%;
+    margin-right: 0rem;
+    margin-top: 1rem;
+  }
+  .hero1inner h1 span {
+    color: blue;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .hero1inner h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  /* hero2 */
+  .hero11 {
+    flex-direction: column-reverse;
+  }
+  .hero11 img {
+    width: 100%;
+    margin-right: 0rem;
+    margin-top: 1rem;
+  }
+  .hero11inner h1 span {
+    color: blue;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .hero11inner h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  .hero11inner p {
+    width: 100%;
+  }
+}

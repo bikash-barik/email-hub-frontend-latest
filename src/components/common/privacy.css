@@ -1,0 +1,52 @@
+.privacy {
+  display: flex;
+  margin: 7rem 2rem 7rem 2rem;
+  align-items: center;
+  justify-content: space-around;
+}
+.privacy img {
+  width: 30rem;
+  padding-right: 2rem;
+}
+.privacycontent h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: blue;
+  text-align: center;
+}
+.privacycontent {
+  width: 42%;
+}
+.privacycontent h1 span {
+  font-size: 3rem;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+}
+.privacycontent p {
+  text-align: justify;
+  color: gray;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .privacy {
+    flex-direction: column;
+    padding-top: 3rem;
+    margin: 0.2rem;
+  }
+  .privacy img {
+    padding-right: 0rem;
+    width: 100%;
+  }
+  .privacycontent {
+    width: 95%;
+  }
+  .privacycontent h1,
+  .privacycontent h1 span {
+    font-size: 2rem;
+  }
+  .privacycontent{
+    margin-top: 2rem;
+  }
+}

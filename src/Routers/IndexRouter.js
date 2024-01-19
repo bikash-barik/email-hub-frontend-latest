@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import AppRouter from "./AppRouter";
 import Home from "../components/common/SendEmailPagesUI/Componets/Navbar/Navbar.js"
-import NotFound from "../Pages/NotFound";
+import Price from "./../components/common/Price.jsx"
 
 const IndexRouter = () => {
   return (
@@ -14,6 +14,7 @@ const IndexRouter = () => {
       <Router>
         <Switch>
           <Route exact path={["/", "/Home", "/home"]} component={Home} />
+          <Route exact path={["/price"]} component={<Price/>} />
 
           <AppRouter />
           

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 import axios from "axios";
 import { io } from "socket.io-client";
-import "./Style.css";
 import URLAPI from "../API/URLAPI";
 import { Container } from "react-bootstrap";
 import { Col, Row, List, Typography } from "antd";
@@ -296,7 +295,7 @@ function EmailSand(props) {
                         1
                       </th>
 
-                      <td className="p-2">Donain</td>
+                      <td className="p-2">Domain</td>
                       <td className="p-2">Emails</td>
                       <td className="p-1">
                         <button type="button" class="btn btn-success p-1">
