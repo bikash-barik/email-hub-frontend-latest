@@ -12,21 +12,14 @@ const Hero = () => {
           <h1>The Best Email Experience Ever Made</h1>
           <p>Get BlueMail for free on any platform</p>
           <div className="mb-2">
-            {[SplitButton].map((DropdownType, idx) => (
-              <DropdownType
-                as={ButtonGroup}
-                key={idx}
-                id={`dropdown-button-drop-${idx}`}
-                size="lg"
-                title="Drop large"
-              >
-                <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-              </DropdownType>
-            ))}
+            <div class="dropdown">
+              <button class="dropbtn">Dropdown</button>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
           </div>
           <h6>Unlimited accounts. Any provider.</h6>
         </div>

@@ -30,18 +30,18 @@ const Hero1 = () => {
       <div className="hero11">
         <img src={Hero} alt="" />
         <div className="hero11inner">
-          <h1>
+          <h5>
             <span>BlueMail GenAI</span>
             <br />
             Generative Email
-          </h1>
+          </h5>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam unde
             consequuntur sapiente, voluptatibus hic facere illo minus omnis est
             eius vitae qui repellendus id magni, temporibus in dicta corporis
             autem beatae explicabo vero deleniti.
           </p>
-          <button className="btn btn-outline-primary btn-lg">
+          <button className="btn btn-outline-primary p-2 btn-lg">
             Download <FaDownload />{" "}
           </button>
         </div>

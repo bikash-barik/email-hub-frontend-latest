@@ -24,25 +24,36 @@
 // export default Carousel;
 
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import ReactDOM from "react-dom";
+import { ScrollingCarousel } from "@trendyol-js/react-carousel";
+import Art1 from "../image/artboard (1).webp";
+import Art2 from "../image/artboard (2).webp";
+import Art3 from "../image/artboard (3).webp";
+import Art4 from "../image/artboard (4).webp";
+import Art5 from "../image/artboard (5).webp";
+import Art6 from "../image/artboard (6).webp";
+import Art7 from "../image/artboard (7).webp";
+
+import "./../../common/service.css";
 
 const CarouselPage = () => {
   return (
-    <Carousel>
-      <div style={{ height: "30rem" }}>
-        <img src="https://placehold.co/100x100" />
-        <p className="legend">Legend 1</p>
-      </div>
-      <div style={{ height: "30rem" }}>
-        <img src="https://placehold.co/200x200" />
-        <p className="legend">Legend 2</p>
-      </div>
-      <div style={{ height: "30rem" }}>
-        <img src="https://placehold.co/300x300" />
-        <p className="legend">Legend 3</p>
-      </div>
-    </Carousel>
+    <ScrollingCarousel
+      className="ScrollingCarousel"
+      show={3.5}
+      slide={2}
+      transition={0.5}
+      autoplay={true}
+      infinite={true}
+    >
+      <img src={Art7} className="" />
+      <img src={Art6} className="" />
+      <img src={Art5} className="" />
+      <img src={Art4} className="" />
+      <img src={Art3} className="" />
+      <img src={Art2} className="" />
+      <img src={Art1} className="" />
+    </ScrollingCarousel>
   );
 };
 export default CarouselPage;

@@ -101,13 +101,13 @@ export default function CircularDemo() {
   const productTemplate = (product) => {
     return (
       <>
-        <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+        <div className="border-1 surface-border border-round m-2 text-center py-5 px-3 mb-3">
           <div className="mb-3">
             <img
               src={product.image}
               alt={product.name}
               width={"200px"}
-              className="w-6 shadow-2"
+              className=" shadow-2"
             />
           </div>
           <div>
