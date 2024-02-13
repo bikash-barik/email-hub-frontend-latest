@@ -6,14 +6,14 @@ import {
 } from "react-router-dom";
 import React from "react";
 // import LandingPage from "../components/Application/LoginScreen/LoginScreen";
-import LandingPage from "../admin/LoginScreen/LoginScreen"
+import LandingPage from "../admin/LoginScreen/LoginScreen";
 import LandingPage2 from "../user/SubLoginScreen/LoginScreen";
 
 import Emailsend from "../components/common/SendEmailPagesUI/Componets/EmailSand";
-
+import Navbar from "./../components/common/SendEmailPagesUI/Componets/Navbar/Navbar.js";
 
 import NotFound from "../Pages/NotFound";
-
+import Price from "./../components/common/Price.jsx"
 const AppRouter = () => {
   // const [style, setStyle] = useState("bg-color2 ");
   // const [zoomLevel, setZoomLevel] = useState(14); // start with 100% zoom level
@@ -51,30 +51,16 @@ const AppRouter = () => {
   return (
     <>
       <Router>
-        <span></span>
-        
         <Switch>
-          
-
-          <Route
-            exact
-            path={["/Krishna", "/App"]}
-            component={LandingPage}
-          />
-          <Route
-            exact
-            path={["/Login", "/Signin"]}
-            component={LandingPage2}
-          />
+          <Route exact path={["/Krishna", "/App"]} component={LandingPage} />
+          <Route exact path={["/Login", "/Signin"]} component={LandingPage2} />
           
           <Route path="/Emailsend" component={Emailsend} />
 
           <Route path="/error" component={NotFound} />
-      
+
           <Redirect to="/error" />
         </Switch>
-
-       
       </Router>
     </>
   );

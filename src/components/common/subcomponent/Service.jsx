@@ -106,7 +106,7 @@ export default function CircularDemo() {
             <img
               src={product.image}
               alt={product.name}
-              width={"200px"}
+              width={"100px"}
               className=" shadow-2"
             />
           </div>
