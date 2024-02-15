@@ -14,6 +14,7 @@ function DoaminCountry() {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!file) return;
@@ -23,7 +24,7 @@ function DoaminCountry() {
       method: "POST",
       body: formData,
     });
-    const data = await response.json();
+    const data = await response.json({});
     console.log(data);
     setResults(data);
     setFilteredResults(data);
