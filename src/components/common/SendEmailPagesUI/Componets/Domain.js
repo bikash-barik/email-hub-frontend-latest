@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import URLAPI from "../API/URLAPI";
@@ -11,6 +11,18 @@ function AddDomain() {
   const [data, setData] = useState([]);
   const [length, setlength] = useState("");
   const history = useHistory();
+  const [checkedDomains, setCheckedDomains] = useState([]);
+
+  // Function to handle checkbox change
+  const handleCheckboxChange = (domain) => {
+    const updatedDomains = [...checkedDomains];
+    if (updatedDomains.includes(domain)) {
+      updatedDomains.splice(updatedDomains.indexOf(domain), 1);
+    } else {
+      updatedDomains.push(domain);
+    }
+    setCheckedDomains(updatedDomains);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -46,6 +58,10 @@ function AddDomain() {
       console.error(error);
     }
   }
+  useEffect(() => {
+    // Save checkedDomains array to localStorage
+    localStorage.setItem("checkedDomains", JSON.stringify(checkedDomains));
+  }, [checkedDomains]);
 
   const EmailSand = () => {
     history.push("/DomainCountry");
@@ -62,7 +78,9 @@ function AddDomain() {
       <div className="container pt-5" style={{ marginTop: "12rem" }}>
         <div className="d-flex justify-content-between">
           <div className="form-input">
-            <label htmlFor="domainList">Domain List :</label>
+            <label htmlFor="domainList">
+              Domain List : Only select .csv files
+            </label>
             <div className="d-flex justify-content-between">
               <input
                 type="file"
@@ -103,6 +121,9 @@ function AddDomain() {
                 #SL.
               </th>
               <th className="p-1" scope="col">
+                Select
+              </th>
+              <th className="p-1" scope="col">
                 Domain
               </th>
               <th className="p-1" scope="col">
@@ -113,10 +134,20 @@ function AddDomain() {
           <tbody>
             {data.map((domain, index) => (
               <tr key={index}>
-                <th scope="row">{index + 1}</th>
+                <td>{index + 1}</td> {/* Changed <th> to <td> */}
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={checkedDomains.includes(domain)}
+                    onChange={() => handleCheckboxChange(domain)}
+                    style={{ width: "20px", height: "20px", marginLeft: "5px" }}
+                  />
+
+                  {/* Ensure there's no CSS hiding the checkbox */}
+                </td>
                 <td>{domain}</td>
                 <td className="p-1">
-                  <button type="button" class="btn btn-success p-1">
+                  <button type="button" className="btn btn-success p-1">
                     Upload successfully
                   </button>
                 </td>

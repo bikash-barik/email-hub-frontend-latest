@@ -28727,11 +28727,7 @@ mark.doc,
     }
 }
 
-input,
-textarea,
-select {
-    -webkit-appearance: none !important;
-}
+
 
 .form-floating>label {
     color: #959ca9;
