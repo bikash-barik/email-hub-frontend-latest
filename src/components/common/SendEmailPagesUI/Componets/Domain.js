@@ -12,6 +12,7 @@ function AddDomain() {
   const [length, setlength] = useState("");
   const history = useHistory();
   const [checkedDomains, setCheckedDomains] = useState([]);
+  const [masterCheckboxChecked, setMasterCheckboxChecked] = useState(false);
 
   // Function to handle checkbox change
   const handleCheckboxChange = (domain) => {
@@ -22,6 +23,17 @@ function AddDomain() {
       updatedDomains.push(domain);
     }
     setCheckedDomains(updatedDomains);
+  };
+
+  // Function to handle master checkbox change
+  const handleMasterCheckboxChange = () => {
+    if (masterCheckboxChecked) {
+      setCheckedDomains([]);
+    } else {
+      const allDomains = data.map((domain) => domain);
+      setCheckedDomains(allDomains);
+    }
+    setMasterCheckboxChecked(!masterCheckboxChecked);
   };
 
   async function handleSubmit(event) {
@@ -58,6 +70,7 @@ function AddDomain() {
       console.error(error);
     }
   }
+
   useEffect(() => {
     // Save checkedDomains array to localStorage
     localStorage.setItem("checkedDomains", JSON.stringify(checkedDomains));
@@ -66,8 +79,10 @@ function AddDomain() {
   const EmailSand = () => {
     history.push("/DomainCountry");
   };
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
   return (
     <>
       {/* <Stepper/> */}
@@ -104,16 +119,12 @@ function AddDomain() {
             <h2>Valid emails:</h2>
           </div>
           <div class="col">
-            {/* {data && data.domains && ( */}
             <h4>
               Total Domains :
-              {/* <span className="ml-2 text-success">{data.domains.length}</span> */}
               <span className="ml-2 text-success"> {length}</span>
             </h4>
-            {/* )} */}
           </div>
         </div>
-        {/* {data && data.domains && ( */}
         <table class="table table-hover">
           <thead>
             <tr>
@@ -121,7 +132,11 @@ function AddDomain() {
                 #SL.
               </th>
               <th className="p-1" scope="col">
-                Select
+                <input
+                  type="checkbox"
+                  checked={masterCheckboxChecked}
+                  onChange={handleMasterCheckboxChange}
+                />
               </th>
               <th className="p-1" scope="col">
                 Domain
@@ -134,7 +149,7 @@ function AddDomain() {
           <tbody>
             {data.map((domain, index) => (
               <tr key={index}>
-                <td>{index + 1}</td> {/* Changed <th> to <td> */}
+                <td>{index + 1}</td>
                 <td>
                   <input
                     type="checkbox"
@@ -142,8 +157,6 @@ function AddDomain() {
                     onChange={() => handleCheckboxChange(domain)}
                     style={{ width: "20px", height: "20px", marginLeft: "5px" }}
                   />
-
-                  {/* Ensure there's no CSS hiding the checkbox */}
                 </td>
                 <td>{domain}</td>
                 <td className="p-1">
@@ -155,7 +168,6 @@ function AddDomain() {
             ))}
           </tbody>
         </table>
-        {/* )} */}
       </div>
     </>
   );

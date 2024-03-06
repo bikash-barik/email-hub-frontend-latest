@@ -14,6 +14,7 @@ function DomainCountry() {
   const [selectedCountry, setSelectedCountry] = useState("All"); // State to track selected country
   const history = useHistory();
   const [checkedDomains, setCheckedDomains] = useState([]);
+  const [masterCheckboxChecked, setMasterCheckboxChecked] = useState(false);
 
   useEffect(() => {
     // Retrieve checkedDomainsArray from localStorage when component mounts
@@ -47,7 +48,7 @@ function DomainCountry() {
       const data = await response.json();
       setResults(data);
       setFilteredResults(data);
-      console.log("result", results);
+      console.log("result", data); // Log the updated data instead of 'results'
     } catch (error) {
       console.error("Error:", error);
     }
@@ -57,18 +58,18 @@ function DomainCountry() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (!file) return;
+
     const formData = new FormData();
     formData.append("domainList", file);
+
     const response = await fetch(`${URLAPI}/api/domain/domainCountry`, {
       method: "POST",
       body: formData,
     });
     const data = await response.json();
-    console.log(data);
     setResults(data);
     setFilteredResults(data);
-    console.log(filteredResults);
+    console.log("submit Handler", data);
   };
 
   const handleFilterChange = (e) => {
@@ -96,7 +97,19 @@ function DomainCountry() {
       updatedDomains.push(domain);
     }
     setCheckedDomains(updatedDomains);
+    localStorage.setItem("checkedDomains", JSON.stringify(updatedDomains));
   };
+
+  const handleMasterCheckboxChange = () => {
+    setMasterCheckboxChecked(!masterCheckboxChecked);
+    const allDomains = filteredResults.map((domain) => domain); // Assuming 'data' contains the list of domains
+    if (masterCheckboxChecked) {
+      setCheckedDomains([]);
+    } else {
+      setCheckedDomains(allDomains);
+    }
+  };
+  
 
   return (
     <>
@@ -170,6 +183,14 @@ function DomainCountry() {
                       ))}
                 </select>
               </div>
+              <div className="col">
+                <h4>Master Checkbox</h4>
+                <input
+                  type="checkbox"
+                  checked={masterCheckboxChecked}
+                  onChange={handleMasterCheckboxChange}
+                />
+              </div>
             </div>
             <table className="table table-hover">
               <thead>
@@ -195,8 +216,6 @@ function DomainCountry() {
                           marginLeft: "5px",
                         }}
                       />
-
-                      {/* Ensure there's no CSS hiding the checkbox */}
                     </td>
                     <td>{domain}</td>
                     <td>

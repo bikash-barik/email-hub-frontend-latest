@@ -24,14 +24,14 @@ function EmailSand(props) {
   const [password, setPassword] = useState("");
   const [mailContent, setMailContent] = useState("");
   const [emailList, setEmailList] = useState(null);
-  const [domainList, setDomainList] = useState(null);
+  // const [domainList, setDomainList] = useState(null);
   const [successRecipient, setSuccessRecipient] = useState([]);
   const userLogin = useSelector((state) => state.userLogin);
 
   const getFiles = () => {
     return {
       emailList,
-      domainList,
+      // domainList,
     };
   };
 
@@ -54,14 +54,23 @@ function EmailSand(props) {
       formData.append("password", password);
       formData.append("mailContent", mailContent);
 
-      const { emailList, domainList } = getFiles();
-      formData.append("emailList", emailList);
-      formData.append("domainList", domainList);
-
-      const response = await axios.post(`${URLAPI}/upload`, formData);
-      console.log(response.data);
+      formData.append("emailSheet", emailList, emailList.name); // Append emailList as emailSheet
+      console.log("email list", emailList);
+      // formData.append("domainSheet", domainList); // Append domainList as domainSheet
+      // console.log("Domain list",domainList);
+      console.log("FOrm data", formData);
+      const response = await axios.post(
+        `${URLAPI}/api/domain/emailsend`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("response", response.data);
     } catch (error) {
-      console.log(error);
+      console.log("errror have",error);
     }
   };
 
@@ -134,7 +143,7 @@ function EmailSand(props) {
                   </Row>
 
                   <Upload
-                    action={"http://localhost:3000/demo"}
+                    // action={"http://localhost:3000/demo"}
                     listType="picture"
                     required
                     style={{ width: "400px" }}
@@ -172,7 +181,6 @@ function EmailSand(props) {
                     showCount
                     style={{ height: "10rem", resize: "vertical" }}
                     id="mailContent"
-                    value={emailList}
                     onChange={(e) => setMailContent(e.target.value)}
                     placeholder="Email Content"
                   />

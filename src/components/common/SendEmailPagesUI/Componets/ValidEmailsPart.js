@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import URLAPI from "../API/URLAPI";
 import { useSelector } from "react-redux";
@@ -10,43 +10,74 @@ function ValidEmailsPart() {
   const history = useHistory();
   const [emailList, setEmailList] = useState(null);
 
-  const handleFileUpload = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("emailList", emailList);
-    // const [, domain] = response.split("@");
-    // console.log(domain)
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-    axios
-      .post(`${URLAPI}/api/domain/validateEmail`, formData, {
+  useEffect(() => {
+    // Check if there's data in localStorage and fetch it
+    const storedResponse = JSON.parse(localStorage.getItem("checkedDomains"));
+    console.log("valid", storedResponse);
+    if (storedResponse) {
+      setResponse(storedResponse);
+    }
+    AutohandleFormSubmit();
+  }, []);
+
+  const AutohandleFormSubmit = async () => {
+    // Retrieve checkedDomainsArray from localStorage
+    const storedCheckedDomains =
+      JSON.parse(localStorage.getItem("checkedDomains")) || [];
+    console.log("Valid checked", storedCheckedDomains);
+
+    try {
+      const response = await fetch(`${URLAPI}/api/domain/autovalidateEmail`, {
+        method: "POST",
+        body: JSON.stringify({ domains: storedCheckedDomains }),
         headers: {
-          "Content-Type": undefined,
+          "Content-Type": "application/json",
         },
-      })
-      .then((response) => {
-        setResponse(response.data);
-        console.log(response);
-        // console.log("dgjvnfd")
-        // window.location.reload(false);
-      })
-      .catch((error) => {
-        console.error(error);
       });
+      const data = await response.json();
+      setResponse(data);
+      // localStorage.setItem("emailValidationResponse", JSON.stringify(data));
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleFileUpload = async (event) => {
+    try {
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append("emailList", emailList);
+
+      const response = await axios.post(
+        `${URLAPI}/api/domain/validateEmail`,
+        formData,
+        {
+          headers: {
+            "Content-Type": undefined,
+          },
+        }
+      );
+
+      setResponse(response.data);
+      console.log("response", response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const EmailSand = () => {
     history.push("/EmailSand");
   };
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-
   return (
     <>
       {userInfo.applicationAccess3 ? (
         <>
           <h3>
-            <i class="bi bi-geo-alt-fill"></i>
+            <i className="bi bi-geo-alt-fill"></i>
             <span> Applications /</span>Valid Email
           </h3>
           <div className="container p-5">
@@ -73,32 +104,32 @@ function ValidEmailsPart() {
             </div>
 
             <hr />
-            {response && (
+            {response && response.validEmails && response.invalidEmails && (
               <div>
-                <div class="container">
-                  <div class="row">
-                    <div class="col">
+                <div className="container">
+                  <div className="row">
+                    <div className="col">
                       <h2>Valid emails:</h2>
                     </div>
-                    <div class="col">
+                    <div className="col">
                       <h4>
                         Total Valid Emails :
                         <span className="ml-2 text-success">
-                          {response.validEmails.length}{" "}
-                        </span>{" "}
+                          {response.validEmails.length}
+                        </span>
                       </h4>
                     </div>
-                    <div class="col">
+                    <div className="col">
                       <h4>
                         Total Invalid Emails :
                         <span className="ml-2 text-danger">
-                          {response.invalidEmails.length}{" "}
+                          {response.invalidEmails.length}
                         </span>
                       </h4>
                     </div>
                   </div>
 
-                  <table class="table table-hover">
+                  <table className="table table-hover">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -109,26 +140,24 @@ function ValidEmailsPart() {
                     </thead>
                     <tbody>
                       {response.validEmails.map((email, i) => (
-                        <tr>
+                        <tr key={i}>
                           <th scope="row"> {i + 1}</th>
-
                           <td>{email.split("@")[1]}</td>
                           <td>{email}</td>
                           <td>
-                            <button type="button" class="btn btn-success">
+                            <button type="button" className="btn btn-success">
                               Valid
                             </button>
                           </td>
                         </tr>
                       ))}
                       {response.invalidEmails.map((email, i) => (
-                        <tr>
+                        <tr key={i}>
                           <th scope="row"> {i + 1}</th>
-
                           <td>Domain</td>
                           <td>{email}</td>
                           <td>
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" className="btn btn-danger">
                               Invalid
                             </button>
                           </td>
